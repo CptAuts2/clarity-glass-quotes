@@ -137,7 +137,6 @@ export default function QuoteSummary({
         <div className="space-y-3">
           <div className="flex justify-between text-sm">
             <span className="text-slate-600">{glassType.name}</span>
-            <span className="font-medium">${pricing.glassPrice.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-slate-600">
@@ -145,16 +144,20 @@ export default function QuoteSummary({
             </span>
             <span className="text-slate-400">{pricing.sqFt} sq ft</span>
           </div>
-          {pricing.thicknessUpcharge > 0 && (
-            <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Thickness ({dimensions.thickness})</span>
-              <span className="font-medium">+${pricing.thicknessUpcharge.toFixed(2)}</span>
-            </div>
-          )}
+          <div className="flex justify-between text-sm">
+            <span className="text-slate-600">Glass @ ${pricing.pricePerSqFt}/sq ft</span>
+            <span className="font-medium">${pricing.glassPrice.toFixed(2)}</span>
+          </div>
           {pricing.edgePrice > 0 && (
             <div className="flex justify-between text-sm">
               <span className="text-slate-600">Edge Finishing</span>
-              <span className="font-medium">+${pricing.edgePrice.toFixed(2)}</span>
+              <span className="font-medium">${pricing.edgePrice.toFixed(2)}</span>
+            </div>
+          )}
+          {pricing.fabricationPrice > 0 && (
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-600">Fabrication</span>
+              <span className="font-medium">${pricing.fabricationPrice.toFixed(2)}</span>
             </div>
           )}
         </div>
@@ -166,7 +169,18 @@ export default function QuoteSummary({
           <span className="font-medium">${pricing.subtotal.toFixed(2)}</span>
         </div>
 
-
+        {pricing.energySurcharge > 0 && (
+          <div className="flex justify-between text-sm">
+            <span className="text-slate-600">Energy Surcharge (11.5%)</span>
+            <span className="font-medium">${pricing.energySurcharge.toFixed(2)}</span>
+          </div>
+        )}
+        {pricing.oversizeCharge > 0 && (
+          <div className="flex justify-between text-sm">
+            <span className="text-slate-600">Oversize Charge (30%)</span>
+            <span className="font-medium">${pricing.oversizeCharge.toFixed(2)}</span>
+          </div>
+        )}
 
         <div className="h-px bg-slate-200" />
 
