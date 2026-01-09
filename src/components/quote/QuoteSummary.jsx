@@ -135,13 +135,35 @@ export default function QuoteSummary({
 
       {/* Breakdown */}
       <div className="p-6 space-y-4">
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm font-medium text-slate-700">
-            <span>{quoteItems.length} item{quoteItems.length !== 1 ? 's' : ''} in quote</span>
-          </div>
+        {/* Line Items */}
+        <div className="space-y-3 max-h-64 overflow-y-auto">
+          {quoteItems.map((item, index) => {
+            const itemPrice = pricing.items[index];
+            const glassName = item.glassType.subtypeId 
+              ? item.glassType.name.split(' - ')[0] + ' - ' + item.glassType.subtypes?.find(s => s.id === item.glassType.subtypeId)?.name
+              : item.glassType.name;
+
+            return (
+              <div key={index} className="text-xs pb-3 border-b border-slate-100 last:border-0">
+                <div className="flex justify-between items-start mb-1">
+                  <span className="font-medium text-slate-700">{glassName}</span>
+                  <span className="font-semibold text-slate-800">${itemPrice.total.toFixed(2)}</span>
+                </div>
+                <div className="text-slate-500 space-y-0.5">
+                  <div>{item.dimensions.width}" × {item.dimensions.height}" × {item.dimensions.thickness}</div>
+                  <div className="capitalize">{item.glassStrength} • Qty: {item.dimensions.quantity}</div>
+                  {item.fabrications.length > 0 && (
+                    <div className="text-[#1e3a5f]">
+                      + {item.fabrications.map(f => `${f.name}${f.quantity > 1 ? ` (${f.quantity})` : ''}`).join(', ')}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        <div className="h-px bg-slate-100" />
+        <div className="h-px bg-slate-200" />
 
         <div className="flex justify-between text-sm">
           <span className="text-slate-600">Subtotal</span>
