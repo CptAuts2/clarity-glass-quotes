@@ -14,9 +14,7 @@ export default function Home() {
     quantity: 1
   });
   const [options, setOptions] = useState({
-    edgeFinish: 'seamed',
-    installation: false,
-    delivery: false
+    edgeFinish: 'seamed'
   });
 
   const pricing = useMemo(() => {
@@ -44,11 +42,7 @@ export default function Home() {
     // Subtotal
     const subtotal = glassPrice + thicknessUpcharge + edgePrice;
 
-    // Additional services
-    const installationPrice = options.installation ? 85 : 0;
-    const deliveryPrice = options.delivery ? 45 : 0;
-
-    const total = subtotal + installationPrice + deliveryPrice;
+    const total = subtotal;
 
     return {
       total,

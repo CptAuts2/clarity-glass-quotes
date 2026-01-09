@@ -1,9 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sparkles, Truck, Wrench, Scissors } from 'lucide-react';
+import { Scissors } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const edgeFinishes = [
@@ -56,78 +55,7 @@ export default function OptionsSelector({ options, onChange }) {
         </div>
       </div>
 
-      {/* Additional Services */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Installation */}
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          className={cn(
-            "bg-white rounded-2xl border-2 p-6 transition-all cursor-pointer",
-            options.installation
-              ? "border-[#1e3a5f] bg-gradient-to-br from-white to-[#e8f4fc]"
-              : "border-slate-200"
-          )}
-          onClick={() => handleChange('installation', !options.installation)}
-        >
-          <div className="flex items-start justify-between">
-            <div className="flex items-start gap-4">
-              <div className={cn(
-                "w-12 h-12 rounded-xl flex items-center justify-center",
-                options.installation ? "bg-[#1e3a5f]" : "bg-slate-100"
-              )}>
-                <Wrench className={cn(
-                  "w-6 h-6",
-                  options.installation ? "text-white" : "text-slate-400"
-                )} />
-              </div>
-              <div>
-                <h3 className="font-semibold text-slate-800">Professional Installation</h3>
-                <p className="text-sm text-slate-500 mt-1">Expert installation by certified technicians</p>
-                <p className="text-[#1e3a5f] font-medium mt-2">+$85 flat rate</p>
-              </div>
-            </div>
-            <Switch
-              checked={options.installation}
-              onCheckedChange={(checked) => handleChange('installation', checked)}
-            />
-          </div>
-        </motion.div>
 
-        {/* Delivery */}
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          className={cn(
-            "bg-white rounded-2xl border-2 p-6 transition-all cursor-pointer",
-            options.delivery
-              ? "border-[#1e3a5f] bg-gradient-to-br from-white to-[#e8f4fc]"
-              : "border-slate-200"
-          )}
-          onClick={() => handleChange('delivery', !options.delivery)}
-        >
-          <div className="flex items-start justify-between">
-            <div className="flex items-start gap-4">
-              <div className={cn(
-                "w-12 h-12 rounded-xl flex items-center justify-center",
-                options.delivery ? "bg-[#1e3a5f]" : "bg-slate-100"
-              )}>
-                <Truck className={cn(
-                  "w-6 h-6",
-                  options.delivery ? "text-white" : "text-slate-400"
-                )} />
-              </div>
-              <div>
-                <h3 className="font-semibold text-slate-800">Delivery Service</h3>
-                <p className="text-sm text-slate-500 mt-1">Safe delivery to your location</p>
-                <p className="text-[#1e3a5f] font-medium mt-2">+$45 flat rate</p>
-              </div>
-            </div>
-            <Switch
-              checked={options.delivery}
-              onCheckedChange={(checked) => handleChange('delivery', checked)}
-            />
-          </div>
-        </motion.div>
-      </div>
     </motion.div>
   );
 }

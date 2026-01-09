@@ -166,19 +166,7 @@ export default function QuoteSummary({
           <span className="font-medium">${pricing.subtotal.toFixed(2)}</span>
         </div>
 
-        {options.installation && (
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600">Installation</span>
-            <span className="font-medium">+$85.00</span>
-          </div>
-        )}
 
-        {options.delivery && (
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600">Delivery</span>
-            <span className="font-medium">+$45.00</span>
-          </div>
-        )}
 
         <div className="h-px bg-slate-200" />
 
