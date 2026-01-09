@@ -54,6 +54,14 @@ export default function Home() {
     const fabricationPrice = item.fabrications.reduce((sum, fab) => {
       const fabData = fabricationPricing[fab.id];
       const fabQty = fab.quantity || 1;
+      
+      // For per-linear-foot pricing, calculate based on perimeter
+      if (fabData?.priceType === 'perLinearFoot') {
+        const perimeter = 2 * (item.dimensions.width + item.dimensions.height) / 12;
+        return sum + (fabData?.price || 0) * perimeter * quantity;
+      }
+      
+      // For per-piece pricing
       return sum + (fabData?.price || 0) * fabQty * quantity;
     }, 0);
 
