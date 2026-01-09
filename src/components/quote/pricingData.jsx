@@ -128,11 +128,97 @@ export const edgePricing = {
 };
 
 export const fabricationPricing = {
-  hole: { name: 'Hole', price: 8.50, unit: 'each' },
-  hinge_notch: { name: 'Hinge Notch', price: 13.25, unit: 'each' },
-  corner_notch: { name: 'Corner Notch', price: 17.00, unit: 'each' },
-  custom_pattern: { name: 'Custom Pattern', price: 40.00, unit: 'each' },
-  out_of_square: { name: 'Out of Square', price: 0, unit: 'each' }
+  hole: {
+    label: 'Hole',
+    description: 'Drilled holes for hardware',
+    price: 8.50
+  },
+  hinge_notch: {
+    label: 'Hinge Notch',
+    description: 'Cut-outs for hinges',
+    price: 13.25
+  },
+  corner_notch: {
+    label: 'Corner Notch',
+    description: 'L-shaped corner cuts',
+    price: 17.00
+  },
+  u_notch: {
+    label: 'U Notch',
+    description: 'U-shaped notch cuts',
+    price: 10.00
+  },
+  clipped_corner: {
+    label: 'Clipped Corner',
+    description: 'Angled corner clips',
+    price: 10.00
+  },
+  custom_countersink: {
+    label: 'Custom Countersink',
+    description: 'Recessed hole finishing',
+    price: 8.50
+  },
+  polished_edge: {
+    label: 'Polished Edge',
+    description: 'Smooth polished edges',
+    price: 0.12,
+    priceType: 'perLinearFoot'
+  },
+  shape_polish: {
+    label: 'Shape Polish',
+    description: 'Custom shape polishing',
+    price: 0.50,
+    priceType: 'perLinearFoot'
+  },
+  miter_edge: {
+    label: 'Miter Edge',
+    description: 'Angled edge mitering',
+    price: 0.45,
+    priceType: 'perLinearFoot'
+  },
+  bevel_edge_1: {
+    label: 'Bevel Edge - 1"',
+    description: '1 inch beveled edge',
+    price: 0.48,
+    priceType: 'perLinearFoot'
+  },
+  bevel_edge_1_25: {
+    label: 'Bevel Edge - 1-1/4"',
+    description: '1.25 inch beveled edge',
+    price: 0.58,
+    priceType: 'perLinearFoot'
+  },
+  bevel_edge_1_5: {
+    label: 'Bevel Edge - 1-1/2"',
+    description: '1.5 inch beveled edge',
+    price: 0.75,
+    priceType: 'perLinearFoot'
+  },
+  radius_edge: {
+    label: 'Radius Edge',
+    description: 'Rounded edge finish',
+    price: 22.00
+  },
+  interior_cut_small: {
+    label: 'Interior Cut (Small)',
+    description: 'Small interior cutout',
+    price: 20.00
+  },
+  interior_cut_large: {
+    label: 'Interior Cut (Large)',
+    description: 'Large interior cutout',
+    price: 40.00
+  },
+  custom_pattern: {
+    label: 'Custom Pattern',
+    description: 'Custom shapes & patterns',
+    price: 40.00
+  },
+  out_of_square: {
+    label: 'Out of Square',
+    description: 'Non-rectangular shapes',
+    price: 0
+  }
 };
 
 export const ENERGY_SURCHARGE = 0.115; // 11.5%
