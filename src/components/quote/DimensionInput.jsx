@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Ruler, Maximize2, Layers, Hash } from 'lucide-react';
 
 const thicknessOptions = [
+  { value: '3/16"', label: '3/16" (5mm)', multiplier: 0.85 },
   { value: '1/4"', label: '1/4" (6mm)', multiplier: 1 },
   { value: '3/8"', label: '3/8" (10mm)', multiplier: 1.3 },
   { value: '1/2"', label: '1/2" (12mm)', multiplier: 1.6 },
