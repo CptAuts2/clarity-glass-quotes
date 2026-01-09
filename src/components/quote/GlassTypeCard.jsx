@@ -59,6 +59,14 @@ const glassTypes = [
     pricePerSqFt: 28,
     icon: '◈',
     gradient: 'from-blue-50 to-indigo-100'
+  },
+  {
+    id: 'pattern',
+    name: 'Pattern Glass',
+    description: 'Textured glass with decorative patterns',
+    pricePerSqFt: 16,
+    icon: '◈',
+    gradient: 'from-rose-50 to-pink-100'
   }
 ];
 
