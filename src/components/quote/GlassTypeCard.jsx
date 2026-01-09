@@ -51,6 +51,14 @@ const glassTypes = [
     pricePerSqFt: 18,
     icon: '◐',
     gradient: 'from-slate-50 to-zinc-100'
+  },
+  {
+    id: 'showerguard',
+    name: 'ShowerGuard Glass',
+    description: 'Protected glass that resists water spots',
+    pricePerSqFt: 28,
+    icon: '◈',
+    gradient: 'from-blue-50 to-indigo-100'
   }
 ];
 
