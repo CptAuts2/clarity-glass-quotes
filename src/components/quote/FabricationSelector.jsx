@@ -64,6 +64,33 @@ const fabricationOptions = [
     gradient: 'from-cyan-50 to-sky-100'
   },
   {
+    id: 'bevel_edge_1',
+    name: 'Bevel Edge - 1"',
+    description: '1 inch beveled edge',
+    pricePerUnit: fabricationPricing.bevel_edge_1.price,
+    priceType: 'perLinearFoot',
+    icon: '◣',
+    gradient: 'from-emerald-50 to-green-100'
+  },
+  {
+    id: 'bevel_edge_1_25',
+    name: 'Bevel Edge - 1-1/4"',
+    description: '1.25 inch beveled edge',
+    pricePerUnit: fabricationPricing.bevel_edge_1_25.price,
+    priceType: 'perLinearFoot',
+    icon: '◤',
+    gradient: 'from-lime-50 to-emerald-100'
+  },
+  {
+    id: 'bevel_edge_1_5',
+    name: 'Bevel Edge - 1-1/2"',
+    description: '1.5 inch beveled edge',
+    pricePerUnit: fabricationPricing.bevel_edge_1_5.price,
+    priceType: 'perLinearFoot',
+    icon: '◥',
+    gradient: 'from-green-50 to-teal-100'
+  },
+  {
     id: 'interior_cut_small',
     name: 'Interior Cut (Small)',
     description: 'Small interior cutout',

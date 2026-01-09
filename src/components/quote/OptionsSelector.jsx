@@ -10,10 +10,7 @@ const edgeFinishes = [
   { value: 'seamed', label: 'Seamed Edge', price: 0, description: 'Basic safety edge' },
   { value: 'flat_polished', label: 'Flat Polished', price: 0.12, description: 'Smooth, shiny finish' },
   { value: 'pencil', label: 'Pencil Polish', price: 0.25, description: 'Rounded, elegant look' },
-  { value: 'miter_edge', label: 'Miter Edge', price: 0.45, description: 'Angled edge mitering' },
-  { value: 'bevel_edge_1', label: 'Bevel Edge - 1"', price: 0.48, description: '1 inch beveled edge' },
-  { value: 'bevel_edge_1_25', label: 'Bevel Edge - 1-1/4"', price: 0.58, description: '1.25 inch beveled edge' },
-  { value: 'bevel_edge_1_5', label: 'Bevel Edge - 1-1/2"', price: 0.75, description: '1.5 inch beveled edge' }
+  { value: 'miter_edge', label: 'Miter Edge', price: 0.45, description: 'Angled edge mitering' }
 ];
 
 export default function OptionsSelector({ options, onChange }) {
