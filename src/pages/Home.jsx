@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Upload, X, FileText } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { base44 } from '@/api/base44Client';
 import GlassTypeCard, { glassTypes } from '@/components/quote/GlassTypeCard';
 import DimensionInput, { thicknessOptions } from '@/components/quote/DimensionInput';
