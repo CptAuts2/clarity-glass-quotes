@@ -59,7 +59,21 @@ export const glassPricing = {
     }
   },
   pattern_rain: {
-    name: 'Pattern Glass - Rain/Pattern 62/Aquatex',
+    name: 'Pattern Glass - Rain',
+    prices: {
+      '3/16"': { annealed: 7.15, tempered: 8.17 },
+      '3/8"': { annealed: 20.35, tempered: 21.38 }
+    }
+  },
+  pattern_pattern62: {
+    name: 'Pattern Glass - Pattern 62',
+    prices: {
+      '3/16"': { annealed: 7.15, tempered: 8.17 },
+      '3/8"': { annealed: 20.35, tempered: 21.38 }
+    }
+  },
+  pattern_aquatex: {
+    name: 'Pattern Glass - Aquatex',
     prices: {
       '3/16"': { annealed: 7.15, tempered: 8.17 },
       '3/8"': { annealed: 20.35, tempered: 21.38 }

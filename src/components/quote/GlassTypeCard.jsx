@@ -55,7 +55,9 @@ const glassTypes = [
     gradient: 'from-rose-50 to-pink-100',
     hasSubtypes: true,
     subtypes: [
-      { id: 'pattern_rain', name: 'Rain/Pattern 62/Aquatex' }
+      { id: 'pattern_rain', name: 'Rain' },
+      { id: 'pattern_pattern62', name: 'Pattern 62' },
+      { id: 'pattern_aquatex', name: 'Aquatex' }
     ]
   },
   {
