@@ -67,6 +67,14 @@ const glassTypes = [
     pricePerSqFt: 16,
     icon: '◈',
     gradient: 'from-rose-50 to-pink-100'
+  },
+  {
+    id: 'other',
+    name: 'Other Glass',
+    description: 'Custom or specialty glass types',
+    pricePerSqFt: 18,
+    icon: '◇',
+    gradient: 'from-gray-50 to-slate-100'
   }
 ];
 
