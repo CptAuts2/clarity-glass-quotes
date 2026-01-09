@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import GlassTypeCard, { glassTypes } from '@/components/quote/GlassTypeCard';
 import DimensionInput, { thicknessOptions } from '@/components/quote/DimensionInput';
 import OptionsSelector, { edgeFinishes } from '@/components/quote/OptionsSelector';
