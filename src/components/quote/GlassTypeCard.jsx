@@ -51,6 +51,14 @@ const glassTypes = [
     pricePerSqFt: 20,
     icon: '◊',
     gradient: 'from-cyan-50 to-teal-100'
+  },
+  {
+    id: 'mirror',
+    name: 'Mirror',
+    description: 'High-quality reflective mirror glass',
+    pricePerSqFt: 18,
+    icon: '◐',
+    gradient: 'from-slate-50 to-zinc-100'
   }
 ];
 
