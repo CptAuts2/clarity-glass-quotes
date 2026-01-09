@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 const glassTypes = [
   {
     id: 'clear_tempered',
-    name: 'Clear Tempered',
+    name: 'Clear',
     description: 'Strong, safety glass ideal for doors & windows',
     pricePerSqFt: 12,
     icon: '◇',
