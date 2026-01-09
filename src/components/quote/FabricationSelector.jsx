@@ -35,6 +35,14 @@ const fabricationOptions = [
     pricePerUnit: 50,
     icon: '✦',
     gradient: 'from-violet-50 to-purple-100'
+  },
+  {
+    id: 'out_of_square',
+    name: 'Out of Square',
+    description: 'Non-rectangular shapes',
+    pricePerUnit: 30,
+    icon: '⬡',
+    gradient: 'from-emerald-50 to-green-100'
   }
 ];
 
@@ -49,7 +57,7 @@ export default function FabricationSelector({ selected = [], onSelect }) {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {fabricationOptions.map((option, index) => {
         const isSelected = selected.some(s => s.id === option.id);
         return (
