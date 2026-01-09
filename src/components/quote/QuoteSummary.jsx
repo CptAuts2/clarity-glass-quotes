@@ -19,10 +19,9 @@ import { base44 } from '@/api/base44Client';
 import { toast } from 'sonner';
 
 export default function QuoteSummary({ 
-  glassType, 
-  dimensions, 
-  options, 
-  pricing 
+  quoteItems = [],
+  pricing,
+  drawings = []
 }) {
   const [showContactForm, setShowContactForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,24 +39,26 @@ export default function QuoteSummary({
       return;
     }
 
+    if (quoteItems.length === 0) {
+      toast.error('Please add at least one item to your quote');
+      return;
+    }
+
     setIsSubmitting(true);
     
+    const quoteDetails = quoteItems.map((item, index) => {
+      const itemPrice = pricing.items[index];
+      return `${item.glassType.name} (${item.glassStrength}) - ${item.dimensions.width}"x${item.dimensions.height}"x${item.dimensions.thickness} - Qty: ${item.dimensions.quantity} - $${itemPrice.total.toFixed(2)}`;
+    }).join('\n');
+
     await base44.entities.Quote.create({
       customer_name: contact.name,
       customer_email: contact.email,
       customer_phone: contact.phone,
-      glass_type: glassType?.id,
-      width: dimensions.width,
-      height: dimensions.height,
-      thickness: dimensions.thickness,
-      edge_finish: options.edgeFinish,
-      quantity: dimensions.quantity || 1,
-      includes_installation: options.installation,
-      includes_delivery: options.delivery,
       subtotal: pricing.subtotal,
       total_price: pricing.total,
       status: 'sent',
-      notes: contact.notes
+      notes: `MULTI-ITEM QUOTE:\n${quoteDetails}\n\nCustomer Notes: ${contact.notes || 'None'}\n\nDrawings: ${drawings.length} file(s) attached`
     });
 
     setIsSubmitting(false);
@@ -65,7 +66,7 @@ export default function QuoteSummary({
     toast.success('Quote request submitted successfully!');
   };
 
-  if (!glassType || !dimensions.width || !dimensions.height) {
+  if (quoteItems.length === 0) {
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -77,7 +78,7 @@ export default function QuoteSummary({
         </div>
         <h3 className="text-lg font-medium text-slate-600">Your Quote</h3>
         <p className="text-sm text-slate-400 mt-2">
-          Select glass type and enter dimensions to see pricing
+          Add items to your quote to see total pricing
         </p>
       </motion.div>
     );
@@ -134,32 +135,10 @@ export default function QuoteSummary({
 
       {/* Breakdown */}
       <div className="p-6 space-y-4">
-        <div className="space-y-3">
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600">{glassType.name}</span>
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm font-medium text-slate-700">
+            <span>{quoteItems.length} item{quoteItems.length !== 1 ? 's' : ''} in quote</span>
           </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600">
-              {dimensions.width}" × {dimensions.height}" × {dimensions.quantity || 1} pc
-            </span>
-            <span className="text-slate-400">{pricing.sqFt} sq ft</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600">Glass @ ${pricing.pricePerSqFt}/sq ft</span>
-            <span className="font-medium">${pricing.glassPrice.toFixed(2)}</span>
-          </div>
-          {pricing.edgePrice > 0 && (
-            <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Edge Finishing</span>
-              <span className="font-medium">${pricing.edgePrice.toFixed(2)}</span>
-            </div>
-          )}
-          {pricing.fabricationPrice > 0 && (
-            <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Fabrication</span>
-              <span className="font-medium">${pricing.fabricationPrice.toFixed(2)}</span>
-            </div>
-          )}
         </div>
 
         <div className="h-px bg-slate-100" />
@@ -168,19 +147,6 @@ export default function QuoteSummary({
           <span className="text-slate-600">Subtotal</span>
           <span className="font-medium">${pricing.subtotal.toFixed(2)}</span>
         </div>
-
-        {pricing.energySurcharge > 0 && (
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600">Energy Surcharge (11.5%)</span>
-            <span className="font-medium">${pricing.energySurcharge.toFixed(2)}</span>
-          </div>
-        )}
-        {pricing.oversizeCharge > 0 && (
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600">Oversize Charge (30%)</span>
-            <span className="font-medium">${pricing.oversizeCharge.toFixed(2)}</span>
-          </div>
-        )}
 
         <div className="h-px bg-slate-200" />
 

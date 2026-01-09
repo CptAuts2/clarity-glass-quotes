@@ -8,9 +8,12 @@ import DimensionInput, { thicknessOptions } from '@/components/quote/DimensionIn
 import OptionsSelector, { edgeFinishes } from '@/components/quote/OptionsSelector';
 import FabricationSelector, { fabricationOptions } from '@/components/quote/FabricationSelector';
 import QuoteSummary from '@/components/quote/QuoteSummary';
+import QuoteItemsList from '@/components/quote/QuoteItemsList';
 import { glassPricing, edgePricing, fabricationPricing, ENERGY_SURCHARGE, MINIMUM_SQ_FT, OVERSIZE_THRESHOLD, OVERSIZE_CHARGE } from '@/components/quote/pricingData';
 
 export default function Home() {
+  const [quoteItems, setQuoteItems] = useState([]);
+  const [editingIndex, setEditingIndex] = useState(null);
   const [selectedGlass, setSelectedGlass] = useState(null);
   const [glassStrength, setGlassStrength] = useState('');
   const [dimensions, setDimensions] = useState({
@@ -25,64 +28,89 @@ export default function Home() {
   const [fabrications, setFabrications] = useState([]);
   const [drawings, setDrawings] = useState([]);
 
-  const pricing = useMemo(() => {
-    if (!selectedGlass || !dimensions.width || !dimensions.height || !glassStrength) {
-      return { total: 0, subtotal: 0, glassPrice: 0, edgePrice: 0, fabricationPrice: 0, energySurcharge: 0, oversizeCharge: 0, sqFt: 0, breakdown: {} };
+  const calculateItemPrice = (item) => {
+    if (!item.glassType || !item.dimensions.width || !item.dimensions.height || !item.glassStrength) {
+      return { total: 0, subtotal: 0, glassPrice: 0, edgePrice: 0, fabricationPrice: 0, energySurcharge: 0, oversizeCharge: 0, sqFt: 0 };
     }
 
-    const sqFt = (dimensions.width * dimensions.height) / 144;
-    const quantity = dimensions.quantity || 1;
-    let billableSqFt = Math.max(sqFt, MINIMUM_SQ_FT); // Apply 3 sq ft minimum per piece
+    const sqFt = (item.dimensions.width * item.dimensions.height) / 144;
+    const quantity = item.dimensions.quantity || 1;
+    let billableSqFt = Math.max(sqFt, MINIMUM_SQ_FT);
     const totalSqFt = billableSqFt * quantity;
 
-    // Get glass price from pricing data
-    const glassData = glassPricing[selectedGlass.id];
-    const thicknessPrice = glassData?.prices[dimensions.thickness];
-    const pricePerSqFt = thicknessPrice?.[glassStrength] || 0;
-    
+    const glassData = glassPricing[item.glassType.id];
+    const thicknessPrice = glassData?.prices[item.dimensions.thickness];
+    const pricePerSqFt = thicknessPrice?.[item.glassStrength] || 0;
     const glassPrice = totalSqFt * pricePerSqFt;
 
-    // Edge finish price (per linear foot)
-    const edgeData = edgePricing[options.edgeFinish];
-    const perimeter = 2 * (dimensions.width + dimensions.height) / 12; // convert to feet
+    const edgeData = edgePricing[item.options.edgeFinish];
+    const perimeter = 2 * (item.dimensions.width + item.dimensions.height) / 12;
     const edgePrice = (edgeData?.price || 0) * perimeter * quantity;
 
-    // Fabrication price
-    const fabricationPrice = fabrications.reduce((sum, fab) => {
+    const fabricationPrice = item.fabrications.reduce((sum, fab) => {
       const fabData = fabricationPricing[fab.id];
       return sum + (fabData?.price || 0) * quantity;
     }, 0);
 
-    // Subtotal before surcharges
     const subtotal = glassPrice + edgePrice + fabricationPrice;
-
-    // Energy surcharge (11.5%)
     const energySurcharge = subtotal * ENERGY_SURCHARGE;
-
-    // Oversize charge (30% on pieces 50 sq ft or more)
     const oversizeCharge = sqFt >= OVERSIZE_THRESHOLD ? subtotal * OVERSIZE_CHARGE : 0;
-
     const total = subtotal + energySurcharge + oversizeCharge;
 
-    return {
-      total,
-      subtotal,
-      glassPrice,
-      edgePrice,
-      fabricationPrice,
-      energySurcharge,
-      oversizeCharge,
-      sqFt: totalSqFt.toFixed(2),
-      pricePerSqFt,
-      breakdown: {
-        glassPrice,
-        edgePrice,
-        fabricationPrice,
-        energySurcharge,
-        oversizeCharge
-      }
+    return { total, subtotal, glassPrice, edgePrice, fabricationPrice, energySurcharge, oversizeCharge, sqFt: totalSqFt.toFixed(2), pricePerSqFt };
+  };
+
+  const pricing = useMemo(() => {
+    const items = quoteItems.map(item => calculateItemPrice(item));
+    const total = items.reduce((sum, item) => sum + item.total, 0);
+    const subtotal = items.reduce((sum, item) => sum + item.subtotal, 0);
+    return { total, subtotal, items };
+  }, [quoteItems]);
+
+  const currentItemValid = selectedGlass && dimensions.width && dimensions.height && glassStrength;
+
+  const addToQuote = () => {
+    if (!currentItemValid) return;
+    
+    const newItem = {
+      glassType: selectedGlass,
+      glassStrength,
+      dimensions: { ...dimensions },
+      options: { ...options },
+      fabrications: [...fabrications]
     };
-  }, [selectedGlass, dimensions, options, fabrications, glassStrength]);
+
+    if (editingIndex !== null) {
+      const updated = [...quoteItems];
+      updated[editingIndex] = newItem;
+      setQuoteItems(updated);
+      setEditingIndex(null);
+    } else {
+      setQuoteItems([...quoteItems, newItem]);
+    }
+
+    // Reset form
+    setSelectedGlass(null);
+    setGlassStrength('');
+    setDimensions({ width: '', height: '', thickness: '1/4"', quantity: 1 });
+    setOptions({ edgeFinish: 'seamed' });
+    setFabrications([]);
+  };
+
+  const removeItem = (index) => {
+    setQuoteItems(quoteItems.filter((_, i) => i !== index));
+  };
+
+  const editItem = (index) => {
+    const item = quoteItems[index];
+    setSelectedGlass(item.glassType);
+    setGlassStrength(item.glassStrength);
+    setDimensions(item.dimensions);
+    setOptions(item.options);
+    setFabrications(item.fabrications);
+    setEditingIndex(index);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50">
@@ -121,6 +149,15 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Configuration Panel */}
           <div className="lg:col-span-2 space-y-8">
+            {/* Quote Items List */}
+            {quoteItems.length > 0 && (
+              <QuoteItemsList 
+                items={quoteItems}
+                onRemove={removeItem}
+                onEdit={editItem}
+                pricing={pricing}
+              />
+            )}
             {/* Step 1: Glass Type */}
             <section>
               <motion.div
@@ -294,17 +331,43 @@ export default function Home() {
                     </div>
                   </motion.div>
                 </section>
-              </div>
 
-          {/* Quote Summary - Sticky Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="lg:sticky lg:top-8">
-              <QuoteSummary
-                glassType={selectedGlass}
-                dimensions={dimensions}
-                options={options}
+                {/* Add to Quote Button */}
+                <section>
+                  <Button
+                    onClick={addToQuote}
+                    disabled={!currentItemValid}
+                    className="w-full h-14 bg-[#1e3a5f] hover:bg-[#2d4a6f] text-white rounded-xl font-semibold text-lg"
+                  >
+                    {editingIndex !== null ? 'Update Item' : 'Add to Quote'}
+                  </Button>
+                  {editingIndex !== null && (
+                    <Button
+                      onClick={() => {
+                        setEditingIndex(null);
+                        setSelectedGlass(null);
+                        setGlassStrength('');
+                        setDimensions({ width: '', height: '', thickness: '1/4"', quantity: 1 });
+                        setOptions({ edgeFinish: 'seamed' });
+                        setFabrications([]);
+                      }}
+                      variant="outline"
+                      className="w-full mt-2"
+                    >
+                      Cancel Edit
+                    </Button>
+                  )}
+                </section>
+                </div>
+
+                {/* Quote Summary - Sticky Sidebar */}
+                <div className="lg:col-span-1">
+                <div className="lg:sticky lg:top-8">
+                <QuoteSummary
+                quoteItems={quoteItems}
                 pricing={pricing}
-              />
+                drawings={drawings}
+                />
 
               {/* Trust Badges */}
               <motion.div
