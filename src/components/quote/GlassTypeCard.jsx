@@ -29,14 +29,6 @@ const glassTypes = [
     gradient: 'from-amber-50 to-orange-100'
   },
   {
-    id: 'low_e',
-    name: 'Low-E Glass',
-    description: 'Energy efficient with thermal insulation',
-    pricePerSqFt: 18,
-    icon: '❖',
-    gradient: 'from-emerald-50 to-green-100'
-  },
-  {
     id: 'laminated',
     name: 'Laminated Glass',
     description: 'Maximum safety with sound reduction',
