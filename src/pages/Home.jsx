@@ -73,7 +73,7 @@ export default function Home() {
               <span className="text-sm text-slate-600">Instant Pricing Available</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 tracking-tight">
-              Clarity <span className="text-[#1e3a5f]">Glass</span>
+              Clarity <span className="text-[#1e3a5f]">Glass Wholesalers</span>
             </h1>
             <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
               Get an instant quote for premium glass solutions. Custom sizes, professional installation, and fast delivery.
@@ -175,7 +175,7 @@ export default function Home() {
       <footer className="bg-slate-50 border-t border-slate-200 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm text-slate-500">
-            © 2024 Clarity Glass. All prices are estimates and may vary based on final specifications.
+            © 2024 Clarity Glass Wholesalers. All prices are estimates and may vary based on final specifications.
           </p>
         </div>
       </footer>
