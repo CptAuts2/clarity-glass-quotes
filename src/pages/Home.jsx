@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import GlassTypeCard, { glassTypes } from '@/components/quote/GlassTypeCard';
 import DimensionInput, { thicknessOptions } from '@/components/quote/DimensionInput';
 import OptionsSelector, { edgeFinishes } from '@/components/quote/OptionsSelector';
+import FabricationSelector, { fabricationOptions } from '@/components/quote/FabricationSelector';
 import QuoteSummary from '@/components/quote/QuoteSummary';
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
   const [options, setOptions] = useState({
     edgeFinish: 'seamed'
   });
+  const [fabrications, setFabrications] = useState([]);
 
   const pricing = useMemo(() => {
     if (!selectedGlass || !dimensions.width || !dimensions.height) {
@@ -136,8 +138,24 @@ export default function Home() {
                 <h2 className="text-xl font-semibold text-slate-800">Edgework</h2>
               </motion.div>
               <OptionsSelector options={options} onChange={setOptions} />
-            </section>
-          </div>
+                </section>
+
+                {/* Step 4: Fabrication */}
+                <section>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="flex items-center gap-3 mb-4"
+                  >
+                    <span className="w-8 h-8 bg-[#1e3a5f] text-white rounded-lg flex items-center justify-center text-sm font-semibold">
+                      4
+                    </span>
+                    <h2 className="text-xl font-semibold text-slate-800">Fabrication</h2>
+                  </motion.div>
+                  <FabricationSelector selected={fabrications} onSelect={setFabrications} />
+                </section>
+              </div>
 
           {/* Quote Summary - Sticky Sidebar */}
           <div className="lg:col-span-1">
