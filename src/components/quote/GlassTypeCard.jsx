@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 const glassTypes = [
   {
     id: 'clear_tempered',
-    name: 'Clear',
+    name: 'Clear Glass',
     description: 'Strong, safety glass ideal for doors & windows',
     pricePerSqFt: 12,
     icon: '◇',
@@ -35,14 +35,6 @@ const glassTypes = [
     pricePerSqFt: 22,
     icon: '▣',
     gradient: 'from-violet-50 to-purple-100'
-  },
-  {
-    id: 'decorative',
-    name: 'Decorative Glass',
-    description: 'Artistic patterns for unique designs',
-    pricePerSqFt: 25,
-    icon: '✧',
-    gradient: 'from-rose-50 to-pink-100'
   },
   {
     id: 'ultraclear_starphire',
