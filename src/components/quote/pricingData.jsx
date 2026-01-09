@@ -2,7 +2,7 @@
 // Effective: 7/7/25
 
 export const glassPricing = {
-  clear_tempered: {
+  clear: {
     name: 'Clear Glass',
     prices: {
       '1/8"': { annealed: 2.40, tempered: 2.56 },
@@ -14,19 +14,84 @@ export const glassPricing = {
       '3/4"': { annealed: 40.66, tempered: 51.83 }
     }
   },
-  frosted: {
-    name: 'Frosted Glass',
+  tinted_bronze: {
+    name: 'Tinted Glass - Bronze',
+    prices: {
+      '1/4"': { annealed: 3.34, tempered: 4.19 },
+      '3/8"': { annealed: 10.68, tempered: 17.05 }
+    }
+  },
+  tinted_grey: {
+    name: 'Tinted Glass - Grey',
+    prices: {
+      '1/4"': { annealed: 3.34, tempered: 4.19 },
+      '3/8"': { annealed: 10.68, tempered: 17.05 }
+    }
+  },
+  tinted_solex: {
+    name: 'Tinted Glass - Solex',
+    prices: {
+      '1/4"': { annealed: 3.34, tempered: 4.19 },
+      '3/8"': { annealed: 10.68, tempered: 17.05 }
+    }
+  },
+  showerguard: {
+    name: 'ShowerGuard',
+    prices: {
+      '3/8"': { annealed: 13.20, tempered: 13.73 },
+      '1/2"': { annealed: 16.50, tempered: 17.12 }
+    }
+  },
+  ultraclear_showerguard: {
+    name: 'UltraClear ShowerGuard',
+    prices: {
+      '3/8"': { annealed: 22.88, tempered: 23.38 },
+      '1/2"': { annealed: 28.60, tempered: 29.15 }
+    }
+  },
+  low_iron_starphire: {
+    name: 'Low Iron/Starphire',
+    prices: {
+      '1/4"': { annealed: 7.70, tempered: 8.80 },
+      '3/8"': { annealed: 12.10, tempered: 13.20 },
+      '1/2"': { annealed: 16.70, tempered: 18.29 },
+      '3/4"': { annealed: 73.18, tempered: 96.05 }
+    }
+  },
+  pattern_rain: {
+    name: 'Pattern Glass - Rain/Pattern 62/Aquatex',
+    prices: {
+      '3/16"': { annealed: 7.15, tempered: 8.17 },
+      '3/8"': { annealed: 20.35, tempered: 21.38 }
+    }
+  },
+  frosted_satin: {
+    name: 'Frosted Glass - Satin',
     prices: {
       '1/4"': { annealed: 16.50, tempered: 19.42 },
       '3/8"': { annealed: 22.00, tempered: 26.75 },
       '1/2"': { annealed: 26.40, tempered: 29.52 }
     }
   },
-  tinted: {
-    name: 'Tinted Glass',
+  frosted_satin_double: {
+    name: 'Frosted Glass - Satin Double Sided',
     prices: {
-      '1/4"': { annealed: 3.34, tempered: 4.19 },
-      '3/8"': { annealed: 10.68, tempered: 17.05 }
+      '3/8"': { annealed: 18.29, tempered: 25.30 },
+      '1/2"': { annealed: 22.88, tempered: 35.20 }
+    }
+  },
+  frosted_satin_low_iron: {
+    name: 'Frosted Glass - Satin Low Iron',
+    prices: {
+      '1/4"': { annealed: 19.80, tempered: 23.10 },
+      '3/8"': { annealed: 33.00, tempered: 37.57 },
+      '1/2"': { annealed: 37.40, tempered: 40.70 }
+    }
+  },
+  mirror: {
+    name: 'Mirror',
+    prices: {
+      '1/4"': { annealed: 4.07, tempered: 5.28 }
     }
   },
   laminated: {
@@ -36,41 +101,6 @@ export const glassPricing = {
       '3/8"': { annealed: 9.57, tempered: null },
       '1/2"': { annealed: 13.20, tempered: null },
       '3/4"': { annealed: 26.99, tempered: null }
-    }
-  },
-  ultraclear_starphire: {
-    name: 'UltraClear Starphire Glass',
-    prices: {
-      '1/4"': { annealed: 7.70, tempered: 8.80 },
-      '3/8"': { annealed: 12.10, tempered: 13.20 },
-      '1/2"': { annealed: 16.70, tempered: 18.29 },
-      '3/4"': { annealed: 73.18, tempered: 96.05 }
-    }
-  },
-  mirror: {
-    name: 'Mirror',
-    prices: {
-      '1/4"': { annealed: 4.07, tempered: 5.28 }
-    }
-  },
-  showerguard: {
-    name: 'ShowerGuard Glass',
-    prices: {
-      '3/8"': { annealed: 13.20, tempered: 13.73 },
-      '1/2"': { annealed: 16.50, tempered: 17.12 }
-    }
-  },
-  pattern: {
-    name: 'Pattern Glass',
-    prices: {
-      '3/16"': { annealed: 7.15, tempered: 8.17 },
-      '3/8"': { annealed: 20.35, tempered: 21.38 }
-    }
-  },
-  other: {
-    name: 'Other Glass',
-    prices: {
-      '1/4"': { annealed: 5.00, tempered: 6.00 }
     }
   }
 };

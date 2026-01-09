@@ -16,6 +16,7 @@ export default function Home() {
   const [quoteItems, setQuoteItems] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [selectedGlass, setSelectedGlass] = useState(null);
+  const [selectedSubtype, setSelectedSubtype] = useState(null);
   const [glassStrength, setGlassStrength] = useState('');
   const [dimensions, setDimensions] = useState({
     width: '',
@@ -39,7 +40,9 @@ export default function Home() {
     let billableSqFt = Math.max(sqFt, MINIMUM_SQ_FT);
     const totalSqFt = billableSqFt * quantity;
 
-    const glassData = glassPricing[item.glassType.id];
+    // Use subtypeId if available, otherwise use the main glass type id
+    const glassId = item.glassType.subtypeId || item.glassType.id;
+    const glassData = glassPricing[glassId];
     const thicknessPrice = glassData?.prices[item.dimensions.thickness];
     const pricePerSqFt = thicknessPrice?.[item.glassStrength] || 0;
     const glassPrice = totalSqFt * pricePerSqFt;
@@ -93,6 +96,7 @@ export default function Home() {
 
     // Reset form
     setSelectedGlass(null);
+    setSelectedSubtype(null);
     setGlassStrength('');
     setDimensions({ width: '', height: '', thickness: '1/4"', quantity: 1 });
     setOptions({ edgeFinish: 'seamed' });
@@ -106,6 +110,7 @@ export default function Home() {
   const editItem = (index) => {
     const item = quoteItems[index];
     setSelectedGlass(item.glassType);
+    setSelectedSubtype(item.glassType.subtypeId);
     setGlassStrength(item.glassStrength);
     setDimensions(item.dimensions);
     setOptions(item.options);
@@ -172,7 +177,12 @@ export default function Home() {
                 </span>
                 <h2 className="text-xl font-semibold text-slate-800">Choose Your Glass Type</h2>
                 </motion.div>
-                <GlassTypeCard selected={selectedGlass} onSelect={setSelectedGlass} />
+                <GlassTypeCard 
+                  selected={selectedGlass} 
+                  onSelect={setSelectedGlass}
+                  subtype={selectedSubtype}
+                  onSubtypeChange={setSelectedSubtype}
+                />
 
                 {/* Tempered or Annealed Selection */}
                 <motion.div
@@ -348,6 +358,7 @@ export default function Home() {
                       onClick={() => {
                         setEditingIndex(null);
                         setSelectedGlass(null);
+                        setSelectedSubtype(null);
                         setGlassStrength('');
                         setDimensions({ width: '', height: '', thickness: '1/4"', quantity: 1 });
                         setOptions({ edgeFinish: 'seamed' });
