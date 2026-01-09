@@ -2,13 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { fabricationPricing } from './pricingData';
 
 const fabricationOptions = [
   {
     id: 'hole',
     name: 'Hole',
     description: 'Drilled holes for handles or hardware',
-    pricePerUnit: 15,
+    pricePerUnit: fabricationPricing.hole.price,
     icon: '◉',
     gradient: 'from-slate-100 to-gray-200'
   },
@@ -16,7 +17,7 @@ const fabricationOptions = [
     id: 'hinge_notch',
     name: 'Hinge Notch',
     description: 'Cut-outs for hinge installation',
-    pricePerUnit: 25,
+    pricePerUnit: fabricationPricing.hinge_notch.price,
     icon: '⌐',
     gradient: 'from-sky-50 to-blue-100'
   },
@@ -24,7 +25,7 @@ const fabricationOptions = [
     id: 'corner_notch',
     name: 'Corner Notch',
     description: 'L-shaped corner cut-outs',
-    pricePerUnit: 20,
+    pricePerUnit: fabricationPricing.corner_notch.price,
     icon: '⌙',
     gradient: 'from-amber-50 to-orange-100'
   },
@@ -32,7 +33,7 @@ const fabricationOptions = [
     id: 'custom_pattern',
     name: 'Custom Pattern',
     description: 'Custom shapes and patterns',
-    pricePerUnit: 50,
+    pricePerUnit: fabricationPricing.custom_pattern.price,
     icon: '✦',
     gradient: 'from-violet-50 to-purple-100'
   },
@@ -40,7 +41,7 @@ const fabricationOptions = [
     id: 'out_of_square',
     name: 'Out of Square',
     description: 'Non-rectangular shapes',
-    pricePerUnit: 30,
+    pricePerUnit: fabricationPricing.out_of_square.price,
     icon: '⬡',
     gradient: 'from-emerald-50 to-green-100'
   }

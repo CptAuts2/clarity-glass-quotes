@@ -2,13 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { glassPricing } from './pricingData';
 
 const glassTypes = [
   {
     id: 'clear_tempered',
     name: 'Clear Glass',
     description: 'Strong, safety glass ideal for doors & windows',
-    pricePerSqFt: 12,
     icon: '◇',
     gradient: 'from-sky-50 to-blue-100'
   },
@@ -16,7 +16,6 @@ const glassTypes = [
     id: 'frosted',
     name: 'Frosted Glass',
     description: 'Elegant privacy with diffused light',
-    pricePerSqFt: 15,
     icon: '◈',
     gradient: 'from-slate-100 to-gray-200'
   },
@@ -24,7 +23,6 @@ const glassTypes = [
     id: 'tinted',
     name: 'Tinted Glass',
     description: 'Reduce glare & UV with sophisticated color',
-    pricePerSqFt: 14,
     icon: '◆',
     gradient: 'from-amber-50 to-orange-100'
   },
@@ -32,7 +30,6 @@ const glassTypes = [
     id: 'laminated',
     name: 'Laminated Glass',
     description: 'Maximum safety with sound reduction',
-    pricePerSqFt: 22,
     icon: '▣',
     gradient: 'from-violet-50 to-purple-100'
   },
@@ -40,7 +37,6 @@ const glassTypes = [
     id: 'ultraclear_starphire',
     name: 'UltraClear Starphire Glass',
     description: 'Crystal clear low-iron glass',
-    pricePerSqFt: 20,
     icon: '◊',
     gradient: 'from-cyan-50 to-teal-100'
   },
@@ -48,7 +44,6 @@ const glassTypes = [
     id: 'mirror',
     name: 'Mirror',
     description: 'High-quality reflective mirror glass',
-    pricePerSqFt: 18,
     icon: '◐',
     gradient: 'from-slate-50 to-zinc-100'
   },
@@ -56,7 +51,6 @@ const glassTypes = [
     id: 'showerguard',
     name: 'ShowerGuard Glass',
     description: 'Protected glass that resists water spots',
-    pricePerSqFt: 28,
     icon: '◈',
     gradient: 'from-blue-50 to-indigo-100'
   },
@@ -64,7 +58,6 @@ const glassTypes = [
     id: 'pattern',
     name: 'Pattern Glass',
     description: 'Textured glass with decorative patterns',
-    pricePerSqFt: 16,
     icon: '◈',
     gradient: 'from-rose-50 to-pink-100'
   },
@@ -72,7 +65,6 @@ const glassTypes = [
     id: 'other',
     name: 'Other Glass',
     description: 'Custom or specialty glass types',
-    pricePerSqFt: 18,
     icon: '◇',
     gradient: 'from-gray-50 to-slate-100'
   }
@@ -119,8 +111,8 @@ export default function GlassTypeCard({ selected, onSelect }) {
           <p className="text-sm text-slate-500 mb-3">
             {type.description}
           </p>
-          <p className="text-[#1e3a5f] font-medium">
-            ${type.pricePerSqFt}/sq ft
+          <p className="text-[#1e3a5f] font-medium text-sm">
+            Pricing varies by thickness
           </p>
         </motion.div>
       ))}

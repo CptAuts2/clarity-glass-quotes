@@ -8,6 +8,7 @@ import DimensionInput, { thicknessOptions } from '@/components/quote/DimensionIn
 import OptionsSelector, { edgeFinishes } from '@/components/quote/OptionsSelector';
 import FabricationSelector, { fabricationOptions } from '@/components/quote/FabricationSelector';
 import QuoteSummary from '@/components/quote/QuoteSummary';
+import { glassPricing, edgePricing, fabricationPricing, ENERGY_SURCHARGE, MINIMUM_SQ_FT, OVERSIZE_THRESHOLD, OVERSIZE_CHARGE } from '@/components/quote/pricingData';
 
 export default function Home() {
   const [selectedGlass, setSelectedGlass] = useState(null);
@@ -25,41 +26,63 @@ export default function Home() {
   const [drawings, setDrawings] = useState([]);
 
   const pricing = useMemo(() => {
-    if (!selectedGlass || !dimensions.width || !dimensions.height) {
-      return { total: 0, subtotal: 0, glassPrice: 0, edgePrice: 0, thicknessUpcharge: 0, sqFt: 0 };
+    if (!selectedGlass || !dimensions.width || !dimensions.height || !glassStrength) {
+      return { total: 0, subtotal: 0, glassPrice: 0, edgePrice: 0, fabricationPrice: 0, energySurcharge: 0, oversizeCharge: 0, sqFt: 0, breakdown: {} };
     }
 
     const sqFt = (dimensions.width * dimensions.height) / 144;
     const quantity = dimensions.quantity || 1;
-    const totalSqFt = sqFt * quantity;
+    let billableSqFt = Math.max(sqFt, MINIMUM_SQ_FT); // Apply 3 sq ft minimum per piece
+    const totalSqFt = billableSqFt * quantity;
 
-    // Base glass price
-    const glassPrice = totalSqFt * selectedGlass.pricePerSqFt;
-
-    // Thickness multiplier
-    const thicknessOpt = thicknessOptions.find(t => t.value === dimensions.thickness);
-    const thicknessMultiplier = thicknessOpt?.multiplier || 1;
-    const thicknessUpcharge = glassPrice * (thicknessMultiplier - 1);
+    // Get glass price from pricing data
+    const glassData = glassPricing[selectedGlass.id];
+    const thicknessPrice = glassData?.prices[dimensions.thickness];
+    const pricePerSqFt = thicknessPrice?.[glassStrength] || 0;
+    
+    const glassPrice = totalSqFt * pricePerSqFt;
 
     // Edge finish price (per linear foot)
-    const edgeOpt = edgeFinishes.find(e => e.value === options.edgeFinish);
+    const edgeData = edgePricing[options.edgeFinish];
     const perimeter = 2 * (dimensions.width + dimensions.height) / 12; // convert to feet
-    const edgePrice = (edgeOpt?.price || 0) * perimeter * quantity;
+    const edgePrice = (edgeData?.price || 0) * perimeter * quantity;
 
-    // Subtotal
-    const subtotal = glassPrice + thicknessUpcharge + edgePrice;
+    // Fabrication price
+    const fabricationPrice = fabrications.reduce((sum, fab) => {
+      const fabData = fabricationPricing[fab.id];
+      return sum + (fabData?.price || 0) * quantity;
+    }, 0);
 
-    const total = subtotal;
+    // Subtotal before surcharges
+    const subtotal = glassPrice + edgePrice + fabricationPrice;
+
+    // Energy surcharge (11.5%)
+    const energySurcharge = subtotal * ENERGY_SURCHARGE;
+
+    // Oversize charge (30% on pieces 50 sq ft or more)
+    const oversizeCharge = sqFt >= OVERSIZE_THRESHOLD ? subtotal * OVERSIZE_CHARGE : 0;
+
+    const total = subtotal + energySurcharge + oversizeCharge;
 
     return {
       total,
       subtotal,
       glassPrice,
-      thicknessUpcharge,
       edgePrice,
-      sqFt: (totalSqFt).toFixed(2)
+      fabricationPrice,
+      energySurcharge,
+      oversizeCharge,
+      sqFt: totalSqFt.toFixed(2),
+      pricePerSqFt,
+      breakdown: {
+        glassPrice,
+        edgePrice,
+        fabricationPrice,
+        energySurcharge,
+        oversizeCharge
+      }
     };
-  }, [selectedGlass, dimensions, options]);
+  }, [selectedGlass, dimensions, options, fabrications, glassStrength]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50">
