@@ -72,9 +72,11 @@ export default function Home() {
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
               <span className="text-sm text-slate-600">Instant Pricing Available</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 tracking-tight">
-              Clarity <span className="text-[#1e3a5f]">Glass Wholesalers</span>
-            </h1>
+            <img 
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696079d1047918ddfc8fbb16/899316b24_ClarityLogo_Vector_compressedfordocsv2_noglass.jpg" 
+              alt="Clarity Glass Wholesalers" 
+              className="h-24 md:h-32 object-contain mx-auto"
+            />
             <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
               Get an instant quote for premium glass solutions. Custom sizes, professional installation, and fast delivery.
             </p>
