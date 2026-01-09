@@ -123,8 +123,9 @@ export const edgePricing = {
   seamed: { label: 'Seamed Edge', price: 0, description: 'Basic safety edge' },
   flat_polished: { label: 'Flat Polished', price: 0.12, description: 'Smooth, shiny finish' },
   pencil: { label: 'Pencil Polish', price: 0.25, description: 'Rounded, elegant look' },
-  beveled: { label: 'Beveled Edge - 1"', price: 0.48, description: 'Angled, premium finish' },
-  shape_polish: { label: 'Shape Polish', price: 0.50, description: 'Custom shaped & polished edge' }
+  miter_edge: { label: 'Miter Edge', price: 0.45, description: 'Angled edge mitering' },
+  bevel_edge_1_25: { label: 'Bevel Edge - 1-1/4"', price: 0.58, description: '1.25 inch beveled edge' },
+  bevel_edge_1_5: { label: 'Bevel Edge - 1-1/2"', price: 0.75, description: '1.5 inch beveled edge' }
 };
 
 export const fabricationPricing = {

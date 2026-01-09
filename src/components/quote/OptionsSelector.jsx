@@ -6,10 +6,14 @@ import { Scissors } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { edgePricing } from './pricingData';
 
-const edgeFinishes = Object.entries(edgePricing).map(([value, data]) => ({
-  value,
-  ...data
-}));
+const edgeFinishes = [
+  { value: 'seamed', label: 'Seamed Edge', price: 0, description: 'Basic safety edge' },
+  { value: 'flat_polished', label: 'Flat Polished', price: 0.12, description: 'Smooth, shiny finish' },
+  { value: 'pencil', label: 'Pencil Polish', price: 0.25, description: 'Rounded, elegant look' },
+  { value: 'miter_edge', label: 'Miter Edge', price: 0.45, description: 'Angled edge mitering' },
+  { value: 'bevel_edge_1_25', label: 'Bevel Edge - 1-1/4"', price: 0.58, description: '1.25 inch beveled edge' },
+  { value: 'bevel_edge_1_5', label: 'Bevel Edge - 1-1/2"', price: 0.75, description: '1.5 inch beveled edge' }
+];
 
 export default function OptionsSelector({ options, onChange }) {
   const handleChange = (field, value) => {

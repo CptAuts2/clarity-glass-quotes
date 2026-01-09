@@ -54,60 +54,7 @@ const fabricationOptions = [
     icon: '⊙',
     gradient: 'from-teal-50 to-cyan-100'
   },
-  {
-    id: 'polished_edge',
-    name: 'Polished Edge',
-    description: 'Smooth polished edges',
-    pricePerUnit: fabricationPricing.polished_edge.price,
-    priceType: 'perLinearFoot',
-    icon: '▬',
-    gradient: 'from-blue-50 to-indigo-100'
-  },
-  {
-    id: 'shape_polish',
-    name: 'Shape Polish',
-    description: 'Custom shape polishing',
-    pricePerUnit: fabricationPricing.shape_polish.price,
-    priceType: 'perLinearFoot',
-    icon: '◇',
-    gradient: 'from-purple-50 to-violet-100'
-  },
-  {
-    id: 'miter_edge',
-    name: 'Miter Edge',
-    description: 'Angled edge mitering',
-    pricePerUnit: fabricationPricing.miter_edge.price,
-    priceType: 'perLinearFoot',
-    icon: '◢',
-    gradient: 'from-orange-50 to-amber-100'
-  },
-  {
-    id: 'bevel_edge_1',
-    name: 'Bevel Edge - 1"',
-    description: '1 inch beveled edge',
-    pricePerUnit: fabricationPricing.bevel_edge_1.price,
-    priceType: 'perLinearFoot',
-    icon: '◣',
-    gradient: 'from-emerald-50 to-green-100'
-  },
-  {
-    id: 'bevel_edge_1_25',
-    name: 'Bevel Edge - 1-1/4"',
-    description: '1.25 inch beveled edge',
-    pricePerUnit: fabricationPricing.bevel_edge_1_25.price,
-    priceType: 'perLinearFoot',
-    icon: '◤',
-    gradient: 'from-lime-50 to-emerald-100'
-  },
-  {
-    id: 'bevel_edge_1_5',
-    name: 'Bevel Edge - 1-1/2"',
-    description: '1.5 inch beveled edge',
-    pricePerUnit: fabricationPricing.bevel_edge_1_5.price,
-    priceType: 'perLinearFoot',
-    icon: '◥',
-    gradient: 'from-green-50 to-teal-100'
-  },
+
   {
     id: 'radius_edge',
     name: 'Radius Edge',
