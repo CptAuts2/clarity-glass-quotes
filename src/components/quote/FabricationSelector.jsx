@@ -172,7 +172,7 @@ export default function FabricationSelector({ selected = [], onSelect }) {
     onSelect(updated);
   };
 
-  const needsQuantity = (id) => ['hole', 'hinge_notch', 'corner_notch', 'u_notch', 'clipped_corner', 'custom_countersink'].includes(id);
+  const needsQuantity = (id) => ['hole', 'hinge_notch', 'corner_notch', 'u_notch', 'clipped_corner', 'custom_countersink', 'interior_cut_small', 'interior_cut_large'].includes(id);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
