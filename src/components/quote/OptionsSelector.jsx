@@ -9,7 +9,8 @@ const edgeFinishes = [
   { value: 'seamed', label: 'Seamed Edge', description: 'Basic safety edge', price: 0 },
   { value: 'flat_polished', label: 'Flat Polished', description: 'Smooth, shiny finish', price: 3 },
   { value: 'pencil', label: 'Pencil Edge', description: 'Rounded, elegant look', price: 4 },
-  { value: 'beveled', label: 'Beveled Edge', description: 'Angled, premium finish', price: 6 }
+  { value: 'beveled', label: 'Beveled Edge', description: 'Angled, premium finish', price: 6 },
+  { value: 'shape_polish', label: 'Shape Polish', description: 'Custom shaped & polished edge', price: 5 }
 ];
 
 export default function OptionsSelector({ options, onChange }) {
