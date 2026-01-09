@@ -133,7 +133,7 @@ export default function Home() {
                 <span className="w-8 h-8 bg-[#1e3a5f] text-white rounded-lg flex items-center justify-center text-sm font-semibold">
                   3
                 </span>
-                <h2 className="text-xl font-semibold text-slate-800">Additional Options</h2>
+                <h2 className="text-xl font-semibold text-slate-800">Edgework</h2>
               </motion.div>
               <OptionsSelector options={options} onChange={setOptions} />
             </section>
