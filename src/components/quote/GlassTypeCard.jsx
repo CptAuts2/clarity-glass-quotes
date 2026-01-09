@@ -43,6 +43,14 @@ const glassTypes = [
     pricePerSqFt: 25,
     icon: '✧',
     gradient: 'from-rose-50 to-pink-100'
+  },
+  {
+    id: 'ultraclear_starphire',
+    name: 'UltraClear Starphire Glass',
+    description: 'Crystal clear low-iron glass',
+    pricePerSqFt: 20,
+    icon: '◊',
+    gradient: 'from-cyan-50 to-teal-100'
   }
 ];
 
