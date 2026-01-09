@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Plus, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import { fabricationPricing } from './pricingData';
 
 const fabricationOptions = [
@@ -53,14 +54,31 @@ export default function FabricationSelector({ selected = [], onSelect }) {
     if (isSelected) {
       onSelect(selected.filter(s => s.id !== option.id));
     } else {
-      onSelect([...selected, option]);
+      onSelect([...selected, { ...option, quantity: 1 }]);
     }
   };
+
+  const updateQuantity = (id, delta, e) => {
+    e.stopPropagation();
+    const updated = selected.map(item => {
+      if (item.id === id) {
+        const newQty = Math.max(1, (item.quantity || 1) + delta);
+        return { ...item, quantity: newQty };
+      }
+      return item;
+    });
+    onSelect(updated);
+  };
+
+  const needsQuantity = (id) => id === 'hole' || id === 'hinge_notch';
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {fabricationOptions.map((option, index) => {
-        const isSelected = selected.some(s => s.id === option.id);
+        const selectedItem = selected.find(s => s.id === option.id);
+        const isSelected = !!selectedItem;
+        const quantity = selectedItem?.quantity || 1;
+        
         return (
           <motion.div
             key={option.id}
@@ -102,6 +120,30 @@ export default function FabricationSelector({ selected = [], onSelect }) {
             <p className="text-[#1e3a5f] font-medium">
               ${option.pricePerUnit}/each
             </p>
+
+            {isSelected && needsQuantity(option.id) && (
+              <div className="mt-4 flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="h-8 w-8"
+                  onClick={(e) => updateQuantity(option.id, -1, e)}
+                >
+                  <Minus className="h-3 w-3" />
+                </Button>
+                <span className="text-sm font-semibold text-slate-700 min-w-[3ch] text-center">
+                  {quantity}
+                </span>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="h-8 w-8"
+                  onClick={(e) => updateQuantity(option.id, 1, e)}
+                >
+                  <Plus className="h-3 w-3" />
+                </Button>
+              </div>
+            )}
           </motion.div>
         );
       })}

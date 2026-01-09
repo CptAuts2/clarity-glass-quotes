@@ -50,7 +50,8 @@ export default function Home() {
 
     const fabricationPrice = item.fabrications.reduce((sum, fab) => {
       const fabData = fabricationPricing[fab.id];
-      return sum + (fabData?.price || 0) * quantity;
+      const fabQty = fab.quantity || 1;
+      return sum + (fabData?.price || 0) * fabQty * quantity;
     }, 0);
 
     const subtotal = glassPrice + edgePrice + fabricationPrice;
