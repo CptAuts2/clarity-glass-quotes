@@ -47,7 +47,7 @@ export default function OptionsSelector({ options, onChange }) {
               <p className="font-medium text-slate-800 text-sm">{edge.label}</p>
               <p className="text-xs text-slate-500 mt-1">{edge.description}</p>
               {edge.price > 0 && (
-                <p className="text-xs text-[#1e3a5f] mt-2">+${edge.price}/ln ft</p>
+                <p className="text-xs text-[#1e3a5f] mt-2">+${edge.price.toFixed(2)}/ln ft</p>
               )}
             </motion.button>
           ))}

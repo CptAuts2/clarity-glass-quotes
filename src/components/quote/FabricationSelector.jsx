@@ -221,7 +221,7 @@ export default function FabricationSelector({ selected = [], onSelect }) {
             </p>
             <p className="text-[#1e3a5f] font-medium">
               {option.pricePerUnit > 0 ? (
-                option.priceType === 'perLinearFoot' ? `$${option.pricePerUnit}/ln ft` : `$${option.pricePerUnit}/each`
+                option.priceType === 'perLinearFoot' ? `$${option.pricePerUnit.toFixed(2)}/ln ft` : `$${option.pricePerUnit.toFixed(2)}/each`
               ) : 'No charge'}
             </p>
 
