@@ -8,6 +8,7 @@ import QuoteSummary from '@/components/quote/QuoteSummary';
 
 export default function Home() {
   const [selectedGlass, setSelectedGlass] = useState(null);
+  const [glassStrength, setGlassStrength] = useState('');
   const [dimensions, setDimensions] = useState({
     width: '',
     height: '',
@@ -104,9 +105,47 @@ export default function Home() {
                   1
                 </span>
                 <h2 className="text-xl font-semibold text-slate-800">Choose Your Glass Type</h2>
-              </motion.div>
-              <GlassTypeCard selected={selectedGlass} onSelect={setSelectedGlass} />
-            </section>
+                </motion.div>
+                <GlassTypeCard selected={selectedGlass} onSelect={setSelectedGlass} />
+
+                {/* Tempered or Annealed Selection */}
+                <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white rounded-2xl border border-slate-200 p-6 mt-6"
+                >
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-red-500 text-lg">*</span>
+                  <h3 className="font-semibold text-slate-800">Glass Strength (Required)</h3>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    onClick={() => setGlassStrength('tempered')}
+                    className={cn(
+                      "p-4 rounded-xl border-2 transition-all",
+                      glassStrength === 'tempered'
+                        ? "border-[#1e3a5f] bg-[#e8f4fc]"
+                        : "border-slate-200 hover:border-slate-300"
+                    )}
+                  >
+                    <p className="font-semibold text-slate-800">Tempered</p>
+                    <p className="text-sm text-slate-500 mt-1">Heat-treated for safety</p>
+                  </button>
+                  <button
+                    onClick={() => setGlassStrength('annealed')}
+                    className={cn(
+                      "p-4 rounded-xl border-2 transition-all",
+                      glassStrength === 'annealed'
+                        ? "border-[#1e3a5f] bg-[#e8f4fc]"
+                        : "border-slate-200 hover:border-slate-300"
+                    )}
+                  >
+                    <p className="font-semibold text-slate-800">Annealed</p>
+                    <p className="text-sm text-slate-500 mt-1">Standard glass</p>
+                  </button>
+                </div>
+                </motion.div>
+                </section>
 
             {/* Step 2: Dimensions */}
             <section>
