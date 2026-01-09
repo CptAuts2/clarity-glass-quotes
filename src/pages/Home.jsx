@@ -78,7 +78,9 @@ export default function Home() {
               className="h-24 md:h-32 object-contain mx-auto"
             />
             <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
-              Get an instant quote for premium glass solutions. Custom sizes, professional installation, and fast delivery.
+              Follow the steps below for an instant quote. For further assistance, contact our office at{' '}
+              <a href="tel:713-849-2300" className="text-[#1e3a5f] font-medium hover:underline">713-849-2300</a> or at{' '}
+              <a href="mailto:info@clarityhouston.com" className="text-[#1e3a5f] font-medium hover:underline">info@clarityhouston.com</a>.
             </p>
           </motion.div>
         </div>
