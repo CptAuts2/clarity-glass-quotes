@@ -1,4 +1,3 @@
-
 // Clarity Glass Wholesalers Pricing Data
 // Effective: 7/7/25
 
@@ -124,7 +123,8 @@ export const edgePricing = {
   seamed: { label: 'Seamed Edge', price: 0, description: 'Basic safety edge' },
   flat_polished: { label: 'Flat Polished', price: 0.12, description: 'Smooth, shiny finish' },
   pencil: { label: 'Pencil Polish', price: 0.25, description: 'Rounded, elegant look' },
-  miter_edge: { label: 'Miter Edge', price: 0.45, description: 'Angled edge mitering' }
+  miter_edge: { label: 'Miter Edge', price: 0.45, description: 'Angled edge mitering' },
+  shape_polish: { label: 'Shape Polish', price: 0.50, description: 'Custom shape polishing' }
 };
 
 export const fabricationPricing = {

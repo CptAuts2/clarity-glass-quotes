@@ -10,7 +10,8 @@ const edgeFinishes = [
   { value: 'seamed', label: 'Seamed Edge', price: 0, description: 'Basic safety edge' },
   { value: 'flat_polished', label: 'Flat Polished', price: 0.12, description: 'Smooth, shiny finish' },
   { value: 'pencil', label: 'Pencil Polish', price: 0.25, description: 'Rounded, elegant look' },
-  { value: 'miter_edge', label: 'Miter Edge', price: 0.45, description: 'Angled edge mitering' }
+  { value: 'miter_edge', label: 'Miter Edge', price: 0.45, description: 'Angled edge mitering' },
+  { value: 'shape_polish', label: 'Shape Polish', price: 0.50, description: 'Custom shape polishing' }
 ];
 
 export default function OptionsSelector({ options, onChange }) {
