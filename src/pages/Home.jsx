@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { Upload, X, FileText } from 'lucide-react';
+import { base44 } from '@/api/base44Client';
 import GlassTypeCard, { glassTypes } from '@/components/quote/GlassTypeCard';
 import DimensionInput, { thicknessOptions } from '@/components/quote/DimensionInput';
 import OptionsSelector, { edgeFinishes } from '@/components/quote/OptionsSelector';
@@ -20,6 +22,7 @@ export default function Home() {
     edgeFinish: 'seamed'
   });
   const [fabrications, setFabrications] = useState([]);
+  const [drawings, setDrawings] = useState([]);
 
   const pricing = useMemo(() => {
     if (!selectedGlass || !dimensions.width || !dimensions.height) {
@@ -194,6 +197,79 @@ export default function Home() {
                     <h2 className="text-xl font-semibold text-slate-800">Fabrication</h2>
                   </motion.div>
                   <FabricationSelector selected={fabrications} onSelect={setFabrications} />
+                </section>
+
+                {/* Step 5: Submit Drawing */}
+                <section>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex items-center gap-3 mb-4"
+                  >
+                    <span className="w-8 h-8 bg-[#1e3a5f] text-white rounded-lg flex items-center justify-center text-sm font-semibold">
+                      5
+                    </span>
+                    <h2 className="text-xl font-semibold text-slate-800">Submit Drawing</h2>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white rounded-2xl border border-slate-200 p-6"
+                  >
+                    <p className="text-sm text-slate-500 mb-4">
+                      Upload technical drawings, sketches, or reference images (optional)
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer hover:bg-slate-50 transition-colors">
+                        <Upload className="w-8 h-8 text-slate-400 mb-2" />
+                        <span className="text-sm text-slate-600">Click to upload files</span>
+                        <span className="text-xs text-slate-400 mt-1">PDF, PNG, JPG (max 10MB)</span>
+                        <input
+                          type="file"
+                          className="hidden"
+                          accept=".pdf,.png,.jpg,.jpeg"
+                          multiple
+                          onChange={async (e) => {
+                            const files = Array.from(e.target.files || []);
+                            for (const file of files) {
+                              try {
+                                const { file_url } = await base44.integrations.Core.UploadFile({ file });
+                                setDrawings(prev => [...prev, { name: file.name, url: file_url }]);
+                              } catch (error) {
+                                console.error('Upload failed:', error);
+                              }
+                            }
+                            e.target.value = '';
+                          }}
+                        />
+                      </label>
+
+                      {drawings.length > 0 && (
+                        <div className="space-y-2">
+                          {drawings.map((drawing, index) => (
+                            <div
+                              key={index}
+                              className="flex items-center justify-between bg-slate-50 rounded-lg p-3"
+                            >
+                              <div className="flex items-center gap-3">
+                                <FileText className="w-5 h-5 text-[#1e3a5f]" />
+                                <span className="text-sm text-slate-700">{drawing.name}</span>
+                              </div>
+                              <button
+                                onClick={() => setDrawings(prev => prev.filter((_, i) => i !== index))}
+                                className="text-slate-400 hover:text-red-500 transition-colors"
+                              >
+                                <X className="w-5 h-5" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
                 </section>
               </div>
 
