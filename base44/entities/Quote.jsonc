@@ -1,0 +1,97 @@
+{
+  "name": "Quote",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string",
+      "description": "Customer's full name"
+    },
+    "customer_email": {
+      "type": "string",
+      "description": "Customer's email address"
+    },
+    "customer_phone": {
+      "type": "string",
+      "description": "Customer's phone number"
+    },
+    "glass_type": {
+      "type": "string",
+      "enum": [
+        "clear_tempered",
+        "frosted",
+        "tinted",
+        "low_e",
+        "laminated",
+        "decorative"
+      ],
+      "description": "Type of glass selected"
+    },
+    "width": {
+      "type": "number",
+      "description": "Width in inches"
+    },
+    "height": {
+      "type": "number",
+      "description": "Height in inches"
+    },
+    "thickness": {
+      "type": "string",
+      "enum": [
+        "1/4\"",
+        "3/8\"",
+        "1/2\"",
+        "3/4\""
+      ],
+      "description": "Glass thickness"
+    },
+    "edge_finish": {
+      "type": "string",
+      "enum": [
+        "flat_polished",
+        "beveled",
+        "pencil",
+        "seamed"
+      ],
+      "description": "Edge finishing option"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Number of pieces"
+    },
+    "includes_installation": {
+      "type": "boolean",
+      "description": "Whether installation is included"
+    },
+    "includes_delivery": {
+      "type": "boolean",
+      "description": "Whether delivery is included"
+    },
+    "subtotal": {
+      "type": "number",
+      "description": "Subtotal before extras"
+    },
+    "total_price": {
+      "type": "number",
+      "description": "Total quoted price"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "sent",
+        "accepted",
+        "declined"
+      ],
+      "default": "draft"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "glass_type",
+    "width",
+    "height"
+  ]
+}
